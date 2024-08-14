@@ -11,7 +11,8 @@ import {
   SESSION_CLEAR_ACTIVE,
   SESSION_USER_DATA,
   SESSION_SET_XTERM_TITLE,
-  SESSION_SEARCH
+  SESSION_SEARCH,
+  SESSION_PROFILE_POPUP
 } from '../../typings/constants/sessions';
 import type {HyperState, HyperDispatch, HyperActions} from '../../typings/hyper';
 import rpc from '../rpc';
@@ -152,6 +153,34 @@ export function closeSearch(uid?: string, keyEvent?: any) {
     if (getState().sessions.sessions[targetUid]?.search) {
       dispatch({
         type: SESSION_SEARCH,
+        uid: targetUid,
+        value: false
+      });
+    } else {
+      if (keyEvent) {
+        keyEvent.catched = false;
+      }
+    }
+  };
+}
+
+export function openProfilePopup(uid?: string) {
+  return (dispatch: HyperDispatch, getState: () => HyperState) => {
+    const targetUid = uid || getState().sessions.activeUid!;
+    dispatch({
+      type: SESSION_PROFILE_POPUP,
+      value: true,
+      uid: targetUid
+    });
+  };
+}
+
+export function closeProfilePopup(uid?: string, keyEvent?: any) {
+  return (dispatch: HyperDispatch, getState: () => HyperState) => {
+    const targetUid = uid || getState().sessions.activeUid!;
+    if (getState().sessions.sessions[targetUid]?.profilePopup) {
+      dispatch({
+        type: SESSION_PROFILE_POPUP,
         uid: targetUid,
         value: false
       });

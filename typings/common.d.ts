@@ -31,7 +31,7 @@ export type sessionExtraOptions = {
 
 export type MainEvents = {
   close: never;
-  command: string;
+  command: {command: string; event?: string | undefined};
   data: {uid: string | null; data: string; escaped?: boolean};
   exit: {uid: string};
   'info renderer': {uid: string; type: string};
@@ -65,6 +65,8 @@ export type RendererEvents = {
   'session quit req': never;
   'session search close': never;
   'session search': never;
+  'session profilePopup': never;
+  'session profilePopup close': never;
   'session stop req': never;
   'session tmux req': never;
   'session del line beginning req': never;

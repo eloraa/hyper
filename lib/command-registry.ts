@@ -1,11 +1,15 @@
 import type {HyperDispatch} from '../typings/hyper';
 
-import {closeSearch} from './actions/sessions';
+import {closeProfilePopup, closeSearch} from './actions/sessions';
 import {ipcRenderer} from './utils/ipc';
 
 let commands: Record<string, (event: any, dispatch: HyperDispatch) => void> = {
   'editor:search-close': (e, dispatch) => {
     dispatch(closeSearch(undefined, e));
+    window.focusActiveTerm();
+  },
+  'editor:close-profile-popup': (e, dispatch) => {
+    dispatch(closeProfilePopup(undefined, e));
     window.focusActiveTerm();
   }
 };
@@ -13,10 +17,17 @@ let commands: Record<string, (event: any, dispatch: HyperDispatch) => void> = {
 export const getRegisteredKeys = async () => {
   const keymaps = await ipcRenderer.invoke('getDecoratedKeymaps');
 
-  return Object.keys(keymaps).reduce((result: Record<string, string>, actionName) => {
+  return Object.keys(keymaps).reduce((result: Record<string, string | string[]>, actionName) => {
     const commandKeys = keymaps[actionName];
     commandKeys.forEach((shortcut) => {
-      result[shortcut] = actionName;
+      if (result[shortcut]) {
+        if (typeof result[shortcut] === 'string') {
+          result[shortcut] = [result[shortcut] as string];
+        }
+        (result[shortcut] as string[]).push(actionName);
+      } else {
+        result[shortcut] = actionName;
+      }
     });
     return result;
   }, {});

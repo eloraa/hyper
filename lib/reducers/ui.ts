@@ -110,6 +110,7 @@ const initial: uiState = Immutable<Mutable<uiState>>({
   },
   showHamburgerMenu: '',
   showWindowControls: '',
+  showPopupOnNewTab: '',
   quickEdit: false,
   webGLRenderer: true,
   webLinksActivationKey: '',

@@ -6,12 +6,14 @@ import {updatePlugins} from './plugins';
 import {installCLI} from './utils/cli-install';
 import * as systemContextMenu from './utils/system-context-menu';
 
-const commands: Record<string, (focusedWindow?: BrowserWindow) => void> = {
+const commands: Record<string, (focusedWindow?: BrowserWindow, event?: string) => void> = {
   'window:new': () => {
     // If window is created on the same tick, it will consume event too
     setTimeout(app.createWindow, 0);
   },
-  'tab:new': (focusedWindow) => {
+  'tab:new': (focusedWindow, event) => {
+    if (getConfig().showPopupOnNewTab && event === 'keydown') return;
+
     if (focusedWindow) {
       focusedWindow.rpc.emit('termgroup add req', {});
     } else {
@@ -119,6 +121,16 @@ const commands: Record<string, (focusedWindow?: BrowserWindow) => void> = {
   'editor:search-close': (focusedWindow) => {
     focusedWindow?.rpc.emit('session search close');
   },
+  'editor:profilePopup': (focusedWindow) => {
+    if (getConfig().showPopupOnNewTab && focusedWindow) {
+      focusedWindow.rpc.emit('session profilePopup');
+    }
+  },
+  'editor:profilePopup-close': (focusedWindow) => {
+    if (focusedWindow) {
+      focusedWindow.rpc.emit('session profilePopup close');
+    }
+  },
   'cli:install': () => {
     void installCLI(true);
   },
@@ -162,9 +174,9 @@ getConfig().profiles.forEach((profile) => {
   };
 });
 
-export const execCommand = (command: string, focusedWindow?: BrowserWindow) => {
+export const execCommand = (command: string, focusedWindow?: BrowserWindow, event?: string) => {
   const fn = commands[command];
   if (fn) {
-    fn(focusedWindow);
+    fn(focusedWindow, event);
   }
 };

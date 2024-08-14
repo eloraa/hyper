@@ -157,6 +157,14 @@ rpc.on('session search close', () => {
   store_.dispatch(sessionActions.closeSearch());
 });
 
+rpc.on('session profilePopup', () => {
+  store_.dispatch(sessionActions.openProfilePopup());
+});
+
+rpc.on('session profilePopup close', () => {
+  store_.dispatch(sessionActions.closeProfilePopup());
+});
+
 rpc.on('termgroup add req', ({activeUid, profile}) => {
   store_.dispatch(termGroupActions.requestTermGroup(activeUid, profile));
 });

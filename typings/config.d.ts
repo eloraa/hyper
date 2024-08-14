@@ -165,6 +165,12 @@ type profileConfigOptions = {
    */
   showHamburgerMenu: boolean | '';
   /**
+   * set to `true` if you want to show a popup of your profiles when creating a new tab
+   *
+   * default: `false`
+   */
+  showPopupOnNewTab: boolean | '';
+  /**
    * set to `false` if you want to hide the minimize, maximize and close buttons
    *
    * additionally, set to `'left'` if you want them on the left, like in Ubuntu

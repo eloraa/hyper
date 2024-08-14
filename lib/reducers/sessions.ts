@@ -10,7 +10,8 @@ import {
   SESSION_RESIZE,
   SESSION_SET_XTERM_TITLE,
   SESSION_SET_CWD,
-  SESSION_SEARCH
+  SESSION_SEARCH,
+  SESSION_PROFILE_POPUP
 } from '../../typings/constants/sessions';
 import type {sessionState, session, Mutable, ISessionReducer} from '../../typings/hyper';
 import {decorateSessionsReducer} from '../utils/plugins';
@@ -28,6 +29,7 @@ function Session(obj: Immutable.DeepPartial<session>) {
     rows: null,
     cleared: false,
     search: false,
+    profilePopup: false,
     shell: '',
     pid: null,
     profile: ''
@@ -63,6 +65,9 @@ const reducer: ISessionReducer = (state = initialState, action) => {
 
     case SESSION_SEARCH:
       return state.setIn(['sessions', action.uid, 'search'], action.value);
+
+    case SESSION_PROFILE_POPUP:
+      return state.setIn(['sessions', action.uid, 'profilePopup'], action.value);
 
     case SESSION_CLEAR_ACTIVE:
       return state.merge(

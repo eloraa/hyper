@@ -58,11 +58,20 @@ const Hyper = forwardRef<HTMLDivElement, HyperProps>((props, ref) => {
       mousetrap.current?.bind(
         commandKeys,
         (e) => {
-          const command = keys[commandKeys];
-          // We should tell xterm to ignore this event.
-          (e as any).catched = true;
-          props.execCommand(command, getCommandHandler(command), e);
-          shouldPreventDefault(command) && e.preventDefault();
+          const commandList = keys[commandKeys];
+          if (Array.isArray(commandList)) {
+            commandList.forEach((command) => {
+              // We should tell xterm to ignore this event.
+              (e as any).catched = true;
+              props.execCommand(command, getCommandHandler(command), e);
+              shouldPreventDefault(command) && e.preventDefault();
+            });
+          } else {
+            // We should tell xterm to ignore this event.
+            (e as any).catched = true;
+            props.execCommand(commandList, getCommandHandler(commandList), e);
+            shouldPreventDefault(commandList) && e.preventDefault();
+          }
         },
         'keydown'
       );

@@ -327,7 +327,7 @@ export function execCommand(command: string, fn: (e: any, dispatch: HyperDispatc
         if (fn) {
           fn(e, dispatch);
         } else {
-          rpc.emit('command', command);
+          rpc.emit('command', {command, event: e.type});
         }
       }
     });

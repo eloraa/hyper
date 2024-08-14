@@ -48,6 +48,7 @@ let connectors: {
   Header: {state: any[]; dispatch: any[]};
   Hyper: {state: any[]; dispatch: any[]};
   Notifications: {state: any[]; dispatch: any[]};
+  ProfilePopup: {state: any[]; dispatch: any[]};
 };
 let middlewares: Middleware[];
 let uiReducers: IUiReducer[];
@@ -242,7 +243,8 @@ const loadModules = () => {
     Terms: {state: [], dispatch: []},
     Header: {state: [], dispatch: []},
     Hyper: {state: [], dispatch: []},
-    Notifications: {state: [], dispatch: []}
+    Notifications: {state: [], dispatch: []},
+    ProfilePopup: {state: [], dispatch: []}
   };
   uiReducers = [];
   middlewares = [];

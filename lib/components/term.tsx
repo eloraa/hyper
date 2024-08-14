@@ -17,6 +17,7 @@ import {WebLinksAddon} from 'xterm-addon-web-links';
 import {WebglAddon} from 'xterm-addon-webgl';
 
 import type {TermProps} from '../../typings/hyper';
+import {ProfilePopupContainer} from '../containers/profile-popup';
 import terms from '../terms';
 import processClipboard from '../utils/paste';
 import {decorate} from '../utils/plugins';
@@ -550,6 +551,7 @@ export default class Term extends React.PureComponent<
             font={this.props.uiFontFamily}
           />
         ) : null}
+        {this.props.profilePopup ? <ProfilePopupContainer /> : null}
 
         <style jsx global>{`
           .term_fit {

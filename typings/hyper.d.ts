@@ -99,6 +99,7 @@ export type uiState = Immutable<{
   selectionColor: string;
   showHamburgerMenu: boolean | '';
   showWindowControls: boolean | 'left' | '';
+  showPopupOnNewTab: boolean | '';
   termCSS: string;
   uiFontFamily: string;
   updateCanInstall: null | boolean;
@@ -119,6 +120,7 @@ export type session = {
   resizeAt?: number;
   rows: number | null;
   search: boolean;
+  profilePopup: boolean;
   shell: string | null;
   title: string;
   uid: string;
@@ -304,6 +306,7 @@ export type TermGroupOwnProps = {
   | 'onActive'
   | 'onContextMenu'
   | 'onCloseSearch'
+  | 'closeProfilePopup'
   | 'onData'
   | 'onOpenSearch'
   | 'onResize'
@@ -386,6 +389,7 @@ export type TermProps = {
   screenReaderMode: boolean;
   scrollback: number;
   search: boolean;
+  profilePopup: boolean;
   searchAddon: SearchAddon | null;
   selectionColor: string;
   term: Terminal | null;

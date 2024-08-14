@@ -87,6 +87,7 @@ class TermGroup_ extends React.PureComponent<TermGroupProps> {
       padding: this.props.padding,
       cleared: session.cleared,
       search: session.search,
+      profilePopup: session.profilePopup,
       cols: session.cols,
       rows: session.rows,
       copyOnSelect: this.props.copyOnSelect,

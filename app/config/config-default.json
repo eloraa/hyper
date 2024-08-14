@@ -22,6 +22,7 @@
     "workingDirectory": "",
     "showHamburgerMenu": "",
     "showWindowControls": "",
+    "showPopupOnNewTab": "",
     "padding": "12px 14px",
     "colors": {
       "black": "#000000",

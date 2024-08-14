@@ -270,9 +270,9 @@ export function newWindow(
   rpc.on('close', () => {
     window.close();
   });
-  rpc.on('command', (command) => {
+  rpc.on('command', ({command, event}) => {
     const focusedWindow = BrowserWindow.getFocusedWindow();
-    execCommand(command, focusedWindow!);
+    execCommand(command, focusedWindow!, event);
   });
   // pass on the full screen events from the window to react
   rpc.win.on('enter-full-screen', () => {

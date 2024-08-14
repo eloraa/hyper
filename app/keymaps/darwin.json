@@ -41,6 +41,8 @@
   "editor:selectAll": "command+a",
   "editor:search": "command+f",
   "editor:search-close": "esc",
+  "editor:profilePopup": "command+a",
+  "editor:profilePopup-close": "esc",
   "editor:movePreviousWord": "alt+left",
   "editor:moveNextWord": "alt+right",
   "editor:moveBeginningLine": "command+left",

@@ -261,6 +261,14 @@
                         true
                     ]
                 },
+                "showPopupOnTab": {
+                    "description": "set to `true` if you want to show a popup of your profile when creating a new tab\n\ndefault: `false`",
+                    "enum": [
+                        "",
+                        false,
+                        true
+                    ]
+                },
                 "showWindowControls": {
                     "description": "set to `false` if you want to hide the minimize, maximize and close buttons\n\nadditionally, set to `'left'` if you want them on the left, like in Ubuntu\n\ndefault: `true` on Windows and Linux, ignored on macOS",
                     "enum": [
